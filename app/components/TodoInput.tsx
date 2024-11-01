@@ -1,55 +1,50 @@
-"use client";
-
+// components/TodoInput.tsx
 import { useState } from "react";
+import { showToast } from "../utils/toastUtils";
 
-interface TodoItemProps {
-  todoId: number;
-  text: string;
-  completed: boolean;
+interface TodoInputProps {
+  setShowToastMessage: (toast: {
+    toastMessage: string;
+    color: string;
+    showToast: boolean;
+  }) => void;
 }
 
-export default function TodoInput() {
+export default function TodoInput({ setShowToastMessage }: TodoInputProps) {
   const [input, setInput] = useState("");
 
   const handleAdd = () => {
     if (input.trim() === "") {
-      console.log("Empty");
+      showToast(setShowToastMessage, "Enter the input field", "red");
     } else {
-      // Retrieve existing todos from localStorage
-      const existingTodo = JSON.parse(
-        localStorage.getItem("Todo") || "[]"
-      ) as TodoItemProps[];
+      const existingTodo = JSON.parse(localStorage.getItem("Todo") || "[]");
 
-      // Create new todo item
-      const newTodo: TodoItemProps = {
+      const newTodo = {
         todoId:
           Math.floor(Date.now() / 1000) + Math.floor(Math.random() * 1000),
         text: input,
         completed: false,
       };
 
-      // Save updated todos back to localStorage
       localStorage.setItem("Todo", JSON.stringify([...existingTodo, newTodo]));
-
-      const data = localStorage.getItem("Todo");
-      console.log("Updated Todos:", JSON.parse(data || "[]"));
-
       setInput("");
+
+      showToast(setShowToastMessage, "Todo has been added", "green");
     }
   };
 
   return (
-    <div className="flex items-center gap-2 my-4">
+    <div className="flex flex-col md:flex-row items-center gap-2 mx-4 my-4">
       <input
         type="text"
         placeholder="Add new list item"
-        className="border rounded-md p-2 flex-grow"
+        className="border rounded-md p-2 w-full md:flex-grow"
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
       <button
         onClick={handleAdd}
-        className="bg-blue-500 text-white rounded-md px-4 py-2"
+        className="bg-blue-500 text-white rounded-md w-full md:w-3/12 px-6 py-2 mt-2 md:mt-0"
       >
         Add
       </button>

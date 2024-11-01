@@ -1,6 +1,5 @@
-// "use client";
-
-// import { useEffect } from "react";
+"use client";
+import { useEffect, useState } from "react";
 
 interface ToastProps {
   message: string;
@@ -8,17 +7,23 @@ interface ToastProps {
 }
 
 export default function Toast({ message, color }: ToastProps) {
-  // useEffect(()=>{
-  //     const timer = setTimeout(()=>{
+  const [animateClass, setAnimateClass] = useState("animate-slide-in");
 
-  //     },3000)
-  // })
+  useEffect(() => {
+    // Set slide-out animation after 3 seconds
+    const timer = setTimeout(() => {
+      setAnimateClass("animate-slide-out");
+    }, 2800);
+
+    // Clean up the timer on component unmount
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div
-      className={`fixed top-4 right-4 ${
-        color == "red" ? "bg-red-500" : "bg-orange-400"
-      } text-white px-4 py-2 rounded shadow-lg z-50 animate-slide-in`}
+      className={`fixed top-20 right-4 ${
+        color == "red" ? `bg-red-500` : `bg-green-500`
+      } text-white px-4 py-2 rounded ${animateClass}`}
     >
       {message}
     </div>
