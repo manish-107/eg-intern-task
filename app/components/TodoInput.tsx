@@ -3,6 +3,8 @@ import { useState } from "react";
 import { showToast } from "../utils/toastUtils";
 
 interface TodoInputProps {
+  reloadState: number;
+  setReloadState: (reloadState: number) => void;
   setShowToastMessage: (toast: {
     toastMessage: string;
     color: string;
@@ -10,7 +12,11 @@ interface TodoInputProps {
   }) => void;
 }
 
-export default function TodoInput({ setShowToastMessage }: TodoInputProps) {
+export default function TodoInput({
+  setShowToastMessage,
+  reloadState,
+  setReloadState,
+}: TodoInputProps) {
   const [input, setInput] = useState("");
 
   const handleAdd = () => {
@@ -27,6 +33,10 @@ export default function TodoInput({ setShowToastMessage }: TodoInputProps) {
       };
 
       localStorage.setItem("Todo", JSON.stringify([...existingTodo, newTodo]));
+
+      // Correctly typing the previous state
+      setReloadState(reloadState + 1);
+
       setInput("");
 
       showToast(setShowToastMessage, "Todo has been added", "green");
@@ -34,7 +44,7 @@ export default function TodoInput({ setShowToastMessage }: TodoInputProps) {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-2 mx-4 my-4">
+    <div className="flex flex-col md:flex-row items-center gap-2 my-4">
       <input
         type="text"
         placeholder="Add new list item"
