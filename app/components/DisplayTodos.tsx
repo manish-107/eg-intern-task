@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import EditTodo from "./EditTodo";
-import { ReloadContext } from "../context/ContextState";
+import { ReloadContext, ToastContext } from "../context/ContextState";
+import { showToast } from "../utils/toastUtils";
 
 interface TodoData {
   todoId: number;
@@ -24,14 +25,16 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
   });
 
   // Use the context to get reloadState and setReloadState
-  const context = useContext(ReloadContext);
+  const Rcontext = useContext(ReloadContext);
+  const Tcontext = useContext(ToastContext);
 
   // Check if context is defined
-  if (!context) {
+  if (!Rcontext || !Tcontext) {
     throw new Error("ReloadContext must be used within a ReloadProvider");
   }
 
-  const { reloadState, setReloadState } = context;
+  const { reloadState, setReloadState } = Rcontext;
+  const { setShowToastMessage } = Tcontext;
 
   const [todoData, setTodoData] = useState<TodoData[]>(() => {
     const savedTodos = localStorage.getItem("Todo");
@@ -68,7 +71,7 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
       const updatedTodo = todos.filter(
         (todo: TodoData) => todo.todoId !== todoId
       );
-
+      showToast(setShowToastMessage, "Todo Deleted", "red");
       localStorage.setItem("Todo", JSON.stringify(updatedTodo));
       setReloadState((prev) => prev + 1);
     }

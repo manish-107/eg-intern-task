@@ -1,28 +1,23 @@
-// components/TodoInput.tsx
+"use client";
 import { useContext, useState } from "react";
 import { showToast } from "../utils/toastUtils";
-import { ReloadContext } from "../context/ContextState";
+import { ReloadContext, ToastContext } from "../context/ContextState";
+import Toast from "./Toast";
 
-interface TodoInputProps {
-  setShowToastMessage: (toast: {
-    toastMessage: string;
-    color: string;
-    showToast: boolean;
-  }) => void;
-}
-
-export default function TodoInput({ setShowToastMessage }: TodoInputProps) {
+export default function TodoInput() {
   const [input, setInput] = useState("");
 
   // Get reloadState and setReloadState from context
-  const context = useContext(ReloadContext);
+  const Rcontext = useContext(ReloadContext);
+  const TContext = useContext(ToastContext);
 
   // Check if context is defined
-  if (!context) {
+  if (!Rcontext || !TContext) {
     throw new Error("ReloadContext must be used within a ReloadProvider");
   }
 
-  const { setReloadState } = context;
+  const { setReloadState } = Rcontext;
+  const { setShowToastMessage, showToastMessage } = TContext;
 
   const handleAdd = () => {
     if (input.trim() === "") {
@@ -63,20 +58,28 @@ export default function TodoInput({ setShowToastMessage }: TodoInputProps) {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-2 my-4">
-      <input
-        type="text"
-        placeholder="Add new list item"
-        className="border rounded-md p-2 w-full md:flex-grow"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button
-        onClick={handleAdd}
-        className="bg-blue-500 text-white rounded-md w-full md:w-3/12 px-6 py-2 mt-2 md:mt-0"
-      >
-        Add
-      </button>
+    <div>
+      {showToastMessage.showToast && (
+        <Toast
+          message={showToastMessage.toastMessage}
+          color={showToastMessage.color}
+        />
+      )}
+      <div className="flex flex-col md:flex-row items-center gap-2 my-4">
+        <input
+          type="text"
+          placeholder="Add new list item"
+          className="border rounded-md p-2 w-full md:flex-grow"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button
+          onClick={handleAdd}
+          className="bg-blue-500 text-white rounded-md w-full md:w-3/12 px-6 py-2 mt-2 md:mt-0"
+        >
+          Add
+        </button>
+      </div>
     </div>
   );
 }

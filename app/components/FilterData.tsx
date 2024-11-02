@@ -1,4 +1,4 @@
-// components/FilterData.tsx
+"use client";
 
 import { useContext, useEffect, useState } from "react";
 import { DisplayTodos } from "./DisplayTodos";

@@ -1,23 +1,31 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { ReloadContext } from "../context/ContextState";
+import { ReloadContext, ToastContext } from "../context/ContextState";
+import { showToast } from "../utils/toastUtils";
 
 export default function Footer() {
   const [numberOfTodos, setNumberOfTodos] = useState(0);
-  const context = useContext(ReloadContext);
+  const Rcontext = useContext(ReloadContext);
+  const Tcontext = useContext(ToastContext);
 
   // Ensure context is defined
-  if (!context) {
+  if (!Rcontext || !Tcontext) {
     throw new Error("ReloadContext must be used within a ReloadProvider");
   }
 
-  const { reloadState, setReloadState } = context;
+  const { reloadState, setReloadState } = Rcontext;
+  const { setShowToastMessage } = Tcontext;
 
   const clearAllTodo = () => {
+    if (numberOfTodos === 0) {
+      showToast(setShowToastMessage, "No todos to delete", "red");
+      return;
+    }
     localStorage.removeItem("Todo");
     setNumberOfTodos(0);
-    setReloadState(reloadState + 1); // Trigger reload in other components
+    showToast(setShowToastMessage, "All todo cleared", "red");
+    setReloadState((prev) => prev + 1); // Trigger reload in other components
   };
 
   useEffect(() => {

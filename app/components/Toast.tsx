@@ -22,7 +22,7 @@ export default function Toast({ message, color }: ToastProps) {
   return (
     <div
       className={`fixed top-20 right-4 ${
-        color == "red" ? `bg-red-500` : `bg-green-500`
+        color === "red" ? `bg-red-500` : `bg-green-500`
       } text-white px-4 py-2 rounded ${animateClass}`}
     >
       {message}
