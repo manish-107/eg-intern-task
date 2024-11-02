@@ -65,17 +65,17 @@ export default function TodoInput() {
           color={showToastMessage.color}
         />
       )}
-      <div className="flex flex-col md:flex-row items-center gap-2 my-4">
+      <div className="relative my-4 w-full">
         <input
           type="text"
           placeholder="Add new list item"
-          className="border rounded-md p-2 w-full md:flex-grow"
+          className="border rounded-md p-4 w-full pr-16"
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
         <button
           onClick={handleAdd}
-          className="bg-blue-500 text-white rounded-md w-full md:w-3/12 px-6 py-2 mt-2 md:mt-0"
+          className="absolute right-1 m-1 top-1 bottom-1 bg-[#2D70FD] text-white rounded-md px-8 py-2"
         >
           Add
         </button>

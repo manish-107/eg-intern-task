@@ -39,12 +39,12 @@ export default function Footer() {
   }, [reloadState]); // Update todos count whenever reloadState changes
 
   return (
-    <div className="flex flex-row justify-between m-4 mt-10 border-t-2 border-gray-300 pt-3">
-      <h5>{numberOfTodos} Items in the List</h5>
+    <div className="flex flex-row justify-between m-4 mt-10 border-t-2  border-[#EEEEEE] pt-3">
+      <h5 className="text-[#B1BACB]">{numberOfTodos} Items in the List</h5>
       <button
         type="button"
         onClick={clearAllTodo}
-        style={{ cursor: "pointer", color: "red" }}
+        style={{ cursor: "pointer", color: "#B1BACB" }}
       >
         Clear all
       </button>

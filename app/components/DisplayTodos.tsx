@@ -82,35 +82,38 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
       {editView.showEditText && (
         <EditTodo editView={editView} setEditView={setEditView} />
       )}
-      <div className="flex justify-between mx-2 p-2 rounded-lg">
-        <label
-          className={`${
-            todo.completed
-              ? "line-through"
-              : "text-gray-800 hover:text-blue-700"
-          } text-lg flex items-center gap-2`}
-        >
+      <div className="flex items-start mx-2 p-2 text-[1rem] rounded-lg">
+        <div className="flex items-start gap-2 flex-grow">
           <input
             type="checkbox"
             checked={todo.completed}
             onChange={(e) => markAsCompleted(todo.todoId, e.target.checked)}
-            className="custom-checkbox w-6 h-6 rounded-full border-2 border-gray-300 focus:ring-0"
+            className="custom-checkbox w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-gray-300 focus:ring-0 flex-shrink-0 mt-1"
           />
-          {todo.text}
-        </label>
+          <label
+            className={`${
+              todo.completed
+                ? "line-through text-[#8F98A8]"
+                : "text-gray-800 hover:text-[#2D70FD]"
+            } text-sm sm:text-base break-words`}
+            style={{ maxWidth: "60%", whiteSpace: "normal" }}
+          >
+            {todo.text}
+          </label>
+        </div>
 
-        <div className="flex gap-4">
+        <div className="flex gap-2 flex-shrink-0">
           <button
             type="button"
             onClick={() => editTodo(todo.todoId, todo.text)}
-            className="py-1 px-6 rounded-md bg-green-500"
+            className="py-1 px-3 sm:px-6 rounded-md bg-green-500 text-xs sm:text-base"
           >
             Edit
           </button>
           <button
             type="button"
             onClick={() => deleteTodo(todo.todoId)}
-            className="py-1 px-6 rounded-md bg-red-500"
+            className="py-1 px-3 sm:px-6 rounded-md bg-red-500 text-xs sm:text-base"
           >
             Delete
           </button>
