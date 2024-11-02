@@ -55,7 +55,7 @@ export default function EditTodo({ editView, setEditView }: EditTodoProps) {
       className="fixed inset-0 flex items-center justify-center bg-opacity-30 backdrop-blur-sm z-50"
       onClick={handleClickOutside}
     >
-      <div className="bg-green-700 w-96 h-60 gap-6 border-2 border-black rounded-md flex flex-col text-white px-4 py-2 shadow-lg">
+      <div className="bg-[#2D70FD] w-96 h-60 gap-6 border-2 border-black rounded-xl flex flex-col text-white px-4 py-2 shadow-lg">
         <h3 className="text-xl font-bold pt-3 mt-3 pl-3">Edit Todo</h3>
         <div className="flex flex-col gap-3">
           <input
