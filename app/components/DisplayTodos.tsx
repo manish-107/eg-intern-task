@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import EditTodo from "./EditTodo";
+import { ReloadContext } from "../context/ContextState";
 
 interface TodoData {
   todoId: number;
@@ -9,15 +10,9 @@ interface TodoData {
 
 interface DisplayTodosProps {
   todo: TodoData;
-  reloadState: number;
-  setReloadState: (reloadState: number) => void;
 }
 
-export const DisplayTodos = ({
-  todo,
-  reloadState,
-  setReloadState,
-}: DisplayTodosProps) => {
+export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
   const [editView, setEditView] = useState<{
     showEditText: boolean;
     todoText: string;
@@ -27,6 +22,16 @@ export const DisplayTodos = ({
     todoText: "",
     edittodoId: 0,
   });
+
+  // Use the context to get reloadState and setReloadState
+  const context = useContext(ReloadContext);
+
+  // Check if context is defined
+  if (!context) {
+    throw new Error("ReloadContext must be used within a ReloadProvider");
+  }
+
+  const { reloadState, setReloadState } = context;
 
   const [todoData, setTodoData] = useState<TodoData[]>(() => {
     const savedTodos = localStorage.getItem("Todo");
@@ -39,7 +44,7 @@ export const DisplayTodos = ({
     );
     localStorage.setItem("Todo", JSON.stringify(updatedTodos));
     setTodoData(updatedTodos);
-    setReloadState(reloadState + 1);
+    setReloadState((prev) => prev + 1);
   };
 
   useEffect(() => {
@@ -55,15 +60,24 @@ export const DisplayTodos = ({
     });
   };
 
+  const deleteTodo = (todoId: number) => {
+    const localData = localStorage.getItem("Todo");
+    if (localData) {
+      const todos: TodoData[] = JSON.parse(localData);
+
+      const updatedTodo = todos.filter(
+        (todo: TodoData) => todo.todoId !== todoId
+      );
+
+      localStorage.setItem("Todo", JSON.stringify(updatedTodo));
+      setReloadState((prev) => prev + 1);
+    }
+  };
+
   return (
     <div>
       {editView.showEditText && (
-        <EditTodo
-          editView={editView}
-          reloadState={reloadState}
-          setReloadState={setReloadState}
-          setEditView={setEditView}
-        />
+        <EditTodo editView={editView} setEditView={setEditView} />
       )}
       <div className="flex justify-between mx-2 p-2 rounded-lg">
         <label
@@ -90,7 +104,11 @@ export const DisplayTodos = ({
           >
             Edit
           </button>
-          <button type="button" className="py-1 px-6 rounded-md bg-red-500">
+          <button
+            type="button"
+            onClick={() => deleteTodo(todo.todoId)}
+            className="py-1 px-6 rounded-md bg-red-500"
+          >
             Delete
           </button>
         </div>

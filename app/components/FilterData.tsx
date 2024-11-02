@@ -1,7 +1,8 @@
-// FilterData.tsx
+// components/FilterData.tsx
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DisplayTodos } from "./DisplayTodos";
+import { ReloadContext } from "../context/ContextState"; // Import the context
 
 interface TodoData {
   todoId: number;
@@ -9,22 +10,31 @@ interface TodoData {
   completed: boolean;
 }
 
-interface FilterDataProps {
-  reloadState: number;
-  setReloadState: (reloadState: number) => void;
-  todoData: TodoData[];
-}
-
-export const FilterData = ({
-  setReloadState,
-  reloadState,
-  todoData,
-}: FilterDataProps) => {
+export const FilterData = () => {
   const [selectedSort, setSelectedSort] = useState<string>("");
+  const [todoData, setTodoData] = useState<TodoData[]>([]);
+
+  // Use the context to get reloadState and setReloadState
+  const context = useContext(ReloadContext);
+
+  // Check if context is defined
+  if (!context) {
+    throw new Error("ReloadContext must be used within a ReloadProvider");
+  }
+
+  const { reloadState, setReloadState } = context;
+  useEffect(() => {
+    const storedData = localStorage.getItem("Todo");
+    if (storedData) {
+      setTodoData(JSON.parse(storedData) as TodoData[]);
+    } else {
+      setTodoData([]);
+    }
+  }, [reloadState]);
 
   const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSort(event.target.value);
-    setReloadState(reloadState + 1);
+    setReloadState((prev) => prev + 1);
   };
 
   const sortedTodos = () => {
@@ -39,8 +49,7 @@ export const FilterData = ({
         return [...todoData].sort((a, b) => {
           // First sort by completion status (uncompleted first)
           if (a.completed === b.completed) {
-            // If both are the same, sort by todoId (or creation date if available)
-            return a.todoId - b.todoId; // Adjust this if you have a creation date
+            return a.todoId - b.todoId; // If same, sort by todoId
           }
           return a.completed ? 1 : -1; // Uncompleted (false) first, completed (true) last
         });
@@ -83,15 +92,22 @@ export const FilterData = ({
         </label>
       </div>
       <div className="mt-10">
-        {sortedTodos().map((todo) => (
-          <DisplayTodos
-            key={todo.todoId}
-            reloadState={reloadState}
-            setReloadState={setReloadState}
-            todo={todo}
-          />
-        ))}
+        {sortedTodos().length !== 0 ? (
+          sortedTodos().map((todo) => (
+            <DisplayTodos key={todo.todoId} todo={todo} />
+          ))
+        ) : (
+          <NoTodoExists />
+        )}
       </div>
+    </div>
+  );
+};
+
+const NoTodoExists = () => {
+  return (
+    <div>
+      <h2 className="text-center font-bold">Todo list is empty</h2>
     </div>
   );
 };

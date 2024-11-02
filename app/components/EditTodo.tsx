@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { ReloadContext } from "../context/ContextState";
+
 interface EditTodoProps {
   editView: { showEditText: boolean; todoText: string; edittodoId: number };
   setEditView: (value: {
@@ -5,8 +8,6 @@ interface EditTodoProps {
     todoText: string;
     edittodoId: number;
   }) => void;
-  reloadState: number;
-  setReloadState: (reloadState: number) => void;
 }
 
 interface TodoData {
@@ -15,17 +16,22 @@ interface TodoData {
   completed: boolean;
 }
 
-export default function EditTodo({
-  editView,
-  setEditView,
-  reloadState,
-  setReloadState,
-}: EditTodoProps) {
+export default function EditTodo({ editView, setEditView }: EditTodoProps) {
   const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       setEditView({ ...editView, showEditText: false });
     }
   };
+
+  // Use the context to get reloadState and setReloadState
+  const context = useContext(ReloadContext);
+
+  // Check if context is defined
+  if (!context) {
+    throw new Error("ReloadContext must be used within a ReloadProvider");
+  }
+
+  const { setReloadState } = context;
 
   const editTodoValue = () => {
     const savedTodos = localStorage.getItem("Todo");
@@ -39,7 +45,7 @@ export default function EditTodo({
       );
 
       localStorage.setItem("Todo", JSON.stringify(updatedTodos));
-      setReloadState(reloadState + 1);
+      setReloadState((prev) => prev + 1);
       setEditView({ ...editView, showEditText: false });
     }
   };
