@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { DisplayTodos } from "./DisplayTodos";
-import { ReloadContext } from "../context/ContextState"; // Import the context
+import { ReloadContext } from "../context/ContextState"; 
 
 interface TodoData {
   todoId: number;
@@ -23,6 +23,7 @@ export const FilterData = () => {
   }
 
   const { reloadState, setReloadState } = context;
+  
   useEffect(() => {
     const storedData = localStorage.getItem("Todo");
     if (storedData) {

@@ -24,6 +24,12 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
     edittodoId: 0,
   });
 
+  //State to store todo data
+  const [todoData, setTodoData] = useState<TodoData[]>(() => {
+    const savedTodos = localStorage.getItem("Todo");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
+
   // Use the context to get reloadState and setReloadState
   const Rcontext = useContext(ReloadContext);
   const Tcontext = useContext(ToastContext);
@@ -35,12 +41,8 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
 
   const { reloadState, setReloadState } = Rcontext;
   const { setShowToastMessage } = Tcontext;
-
-  const [todoData, setTodoData] = useState<TodoData[]>(() => {
-    const savedTodos = localStorage.getItem("Todo");
-    return savedTodos ? JSON.parse(savedTodos) : [];
-  });
-
+  
+  // Mark perticular todo as completed 
   const markAsCompleted = (todoId: number, completed: boolean) => {
     const updatedTodos = todoData.map((item) =>
       item.todoId === todoId ? { ...item, completed } : item
@@ -49,12 +51,8 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
     setTodoData(updatedTodos);
     setReloadState((prev) => prev + 1);
   };
-
-  useEffect(() => {
-    const savedTodos = localStorage.getItem("Todo");
-    if (savedTodos) setTodoData(JSON.parse(savedTodos));
-  }, [reloadState]);
-
+  
+  //
   const editTodo = (todoId: number, todoText: string) => {
     setEditView({
       edittodoId: todoId,
@@ -62,7 +60,16 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
       showEditText: true,
     });
   };
+  
+  //Set todos whenever reloadstate changes
+  useEffect(() => {
+    const savedTodos = localStorage.getItem("Todo");
+    if (savedTodos) setTodoData(JSON.parse(savedTodos));
+  }, [reloadState]);
 
+ 
+
+  //Delete todo by id
   const deleteTodo = (todoId: number) => {
     const localData = localStorage.getItem("Todo");
     if (localData) {

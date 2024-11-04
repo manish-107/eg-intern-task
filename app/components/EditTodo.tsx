@@ -17,27 +17,32 @@ interface TodoData {
 }
 
 export default function EditTodo({ editView, setEditView }: EditTodoProps) {
+
+  // Close edit dilogBox when clicked outside
   const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       setEditView({ ...editView, showEditText: false });
     }
   };
 
-  // Use the context to get reloadState and setReloadState
-  const context = useContext(ReloadContext);
+  // Access the ReloadContext 
+  const Rcontext = useContext(ReloadContext);
 
   // Check if context is defined
-  if (!context) {
+  if (!Rcontext) {
     throw new Error("ReloadContext must be used within a ReloadProvider");
   }
+// Use the context to get reloadState and setReloadState
+  const { setReloadState } = Rcontext;
 
-  const { setReloadState } = context;
-
+  //Edit todo value
   const editTodoValue = () => {
     const savedTodos = localStorage.getItem("Todo");
+
     if (savedTodos) {
       const todos = JSON.parse(savedTodos);
 
+      //Get todo by id and update todo
       const updatedTodos = todos.map((todo: TodoData) =>
         todo.todoId === editView.edittodoId
           ? { ...todo, text: editView.todoText }

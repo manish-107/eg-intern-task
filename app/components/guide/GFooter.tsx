@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+// Footer component for features page
 export default function GFooter() {
   return (
     <header className="mt-10 h-32 border-b-2 border-[#e16815] bg-black p-3 sm:h-32 sm:p-5">

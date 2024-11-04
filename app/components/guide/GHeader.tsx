@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+// Header component for features page
 export default function GHeader() {
   return (
     <header className="h-32 border-b-2 border-[#ffffff39] bg-black p-3 sm:h-32 sm:p-5">
