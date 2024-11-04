@@ -3,18 +3,18 @@ import GHeader from "../components/guide/GHeader";
 
 export default function Guide() {
   return (
-    <div className="bg-[#1a171d] text-[#e5d4ff] min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col bg-[#1a171d] text-[#e5d4ff]">
       <GHeader />
-      <main className="flex-grow max-w-2xl mt-5 sm:max-w-2xl mx-auto">
-        <ul className="space-y-4 ">
-          <li className="mb-3 border-b-2 p-3 border-[#f3f3f334] hover:bg-[#be9fe31f] rounded-s-none md:rounded-lg transition duration-500 ease-in-out">
+      <main className="mx-auto mt-5 max-w-2xl flex-grow sm:max-w-2xl">
+        <ul className="space-y-4">
+          <li className="mb-3 rounded-s-none border-b-2 border-[#f3f3f334] p-3 transition duration-500 ease-in-out hover:bg-[#be9fe31f] md:rounded-lg">
             <strong className="text-lg text-white"> ➕ Add New Task:</strong>
             <p className="ml-7">
               Users can enter a new task in the input field at the top and add
               it to the list by clicking the Add button.
             </p>
           </li>
-          <li className="mb-3 border-b-2 p-3 border-[#f3f3f334] hover:bg-[#be9fe31f] rounded-s-none md:rounded-lg transition duration-500 ease-in-out">
+          <li className="mb-3 rounded-s-none border-b-2 border-[#f3f3f334] p-3 transition duration-500 ease-in-out hover:bg-[#be9fe31f] md:rounded-lg">
             <strong className="text-lg text-white">✨ Sort Options:</strong>
             <ul className="ml-7 mt-2 space-y-2">
               <li>
@@ -32,7 +32,7 @@ export default function Guide() {
               </li>
             </ul>
           </li>
-          <li className="mb-3 border-b-2 p-3 border-[#f3f3f334] hover:bg-[#be9fe31f] rounded-s-none md:rounded-lg transition duration-500 ease-in-out">
+          <li className="mb-3 rounded-s-none border-b-2 border-[#f3f3f334] p-3 transition duration-500 ease-in-out hover:bg-[#be9fe31f] md:rounded-lg">
             <strong className="text-lg text-white">
               ✅ Mark Task as Complete:
             </strong>
@@ -42,27 +42,27 @@ export default function Guide() {
               strikethrough styling).
             </p>
           </li>
-          <li className="mb-3 border-b-2 p-3 border-[#f3f3f334] hover:bg-[#be9fe31f] rounded-s-none md:rounded-lg transition duration-500 ease-in-out">
+          <li className="mb-3 rounded-s-none border-b-2 border-[#f3f3f334] p-3 transition duration-500 ease-in-out hover:bg-[#be9fe31f] md:rounded-lg">
             <strong className="text-lg text-white">✏️ Edit Task:</strong>
             <p className="ml-7">
               Each task has an Edit button, allowing users to modify the task
               description.
             </p>
           </li>
-          <li className="mb-3 border-b-2 p-3 border-[#f3f3f334] hover:bg-[#be9fe31f] rounded-s-none md:rounded-lg transition duration-500 ease-in-out">
+          <li className="mb-3 rounded-s-none border-b-2 border-[#f3f3f334] p-3 transition duration-500 ease-in-out hover:bg-[#be9fe31f] md:rounded-lg">
             <strong className="text-lg text-white">❌ Delete Task:</strong>
             <p className="ml-7">
               Each task has a Delete button to remove it from the list.
             </p>
           </li>
-          <li className="mb-3 border-b-2 p-3 border-[#f3f3f334] hover:bg-[#be9fe31f] rounded-s-none md:rounded-lg transition duration-500 ease-in-out">
+          <li className="mb-3 rounded-s-none border-b-2 border-[#f3f3f334] p-3 transition duration-500 ease-in-out hover:bg-[#be9fe31f] md:rounded-lg">
             <strong className="text-lg text-white">📌 Clear All Tasks:</strong>
             <p className="ml-7">
               A Clear all option is available at the bottom to delete all tasks
               in the list at once.
             </p>
           </li>
-          <li className="mb-3 border-b-2 p-3 border-[#f3f3f334] hover:bg-[#be9fe31f] rounded-s-none md:rounded-lg transition duration-500 ease-in-out">
+          <li className="mb-3 rounded-s-none border-b-2 border-[#f3f3f334] p-3 transition duration-500 ease-in-out hover:bg-[#be9fe31f] md:rounded-lg">
             <strong className="text-lg text-white">🔢 Task Counter:</strong>
             <p className="ml-7">
               A counter at the bottom displays the total number of items

@@ -8,9 +8,9 @@ import StickyGuide from "./components/StickyGuide";
 export default function Home() {
   return (
     <ReloadProvider>
-      <div className="max-w-5xl mx-auto mt-0 md:mt-24 bg-white p-6 rounded-[2rem]  custom-shadow">
+      <div className="custom-shadow mx-auto mt-0 max-w-5xl rounded-[2rem] bg-white p-6 md:mt-24">
         <StickyGuide />
-        <main className="max-w-xl mx-auto">
+        <main className="mx-auto max-w-xl">
           <Header />
           <TodoInput />
           <FilterData />

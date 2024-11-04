@@ -58,7 +58,7 @@ export const FilterData = () => {
 
   return (
     <div className="mt-10">
-      <div className="flex justify-around flex-col gap-3 md:flex-row">
+      <div className="flex flex-col justify-around gap-3 md:flex-row">
         <h1 className="font-bold">Sort By :</h1>
         <label>
           <input

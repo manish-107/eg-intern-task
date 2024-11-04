@@ -4,6 +4,9 @@ interface ToastProps {
   showToast: boolean;
 }
 
+/* Displays a toast notification with a specified message and color. 
+The toast will automatically disappear after 3 seconds. */
+
 export const showToast = (
   setShowToastMessage: (toast: ToastProps) => void,
   message: string,

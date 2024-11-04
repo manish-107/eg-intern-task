@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
+//Types for toast message props
 interface ToastProps {
   message: string;
   color: string;
@@ -10,7 +11,7 @@ export default function Toast({ message, color }: ToastProps) {
   const [animateClass, setAnimateClass] = useState("animate-slide-in");
 
   useEffect(() => {
-    // Set slide-out animation after 3 seconds
+    // Slide-out animation after 3 seconds
     const timer = setTimeout(() => {
       setAnimateClass("animate-slide-out");
     }, 2800);

@@ -5,24 +5,29 @@ import { ReloadContext, ToastContext } from "../context/ContextState";
 import Toast from "./Toast";
 
 export default function TodoInput() {
+ 
   const [input, setInput] = useState("");
 
-  // Get reloadState and setReloadState from context
+// Access the ReloadContext and ToastContext
   const Rcontext = useContext(ReloadContext);
-  const TContext = useContext(ToastContext);
+  const Tcontext = useContext(ToastContext);
 
   // Check if context is defined
-  if (!Rcontext || !TContext) {
+  if (!Rcontext || !Tcontext) {
     throw new Error("ReloadContext must be used within a ReloadProvider");
   }
 
+  // Get State from context
   const { setReloadState } = Rcontext;
-  const { setShowToastMessage, showToastMessage } = TContext;
+  const { setShowToastMessage, showToastMessage } = Tcontext;
 
+  // Add a new to-do item to the list, handling input validation and local storage updates.
   const handleAdd = () => {
+    
     if (input.trim() === "") {
       showToast(setShowToastMessage, "Enter the input field", "red");
     } else {
+      
       // Retrieve existing todos from localStorage or initialize an empty array
       const existingTodo = JSON.parse(localStorage.getItem("Todo") || "[]");
 
@@ -69,13 +74,13 @@ export default function TodoInput() {
         <input
           type="text"
           placeholder="Add new list item"
-          className="border rounded-md p-4 w-full pr-16"
+          className="w-full rounded-md border p-4 pr-16"
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
         <button
           onClick={handleAdd}
-          className="absolute right-1 m-1 top-1 bottom-1 bg-[#2D70FD] text-white rounded-md px-8 py-2"
+          className="absolute bottom-1 right-1 top-1 m-1 rounded-md bg-[#2D70FD] px-8 py-2 text-white"
         >
           Add
         </button>

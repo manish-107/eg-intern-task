@@ -82,13 +82,13 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
       {editView.showEditText && (
         <EditTodo editView={editView} setEditView={setEditView} />
       )}
-      <div className="flex items-start mx-2 p-2 text-[1rem] rounded-lg">
-        <div className="flex items-start gap-2 flex-grow">
+      <div className="mx-2 flex items-start rounded-lg p-2 text-[1rem]">
+        <div className="flex flex-grow items-start gap-2">
           <input
             type="checkbox"
             checked={todo.completed}
             onChange={(e) => markAsCompleted(todo.todoId, e.target.checked)}
-            className="custom-checkbox w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-gray-300 focus:ring-0 flex-shrink-0 mt-1"
+            className="custom-checkbox mt-1 h-5 w-5 flex-shrink-0 rounded-full border-2 border-gray-300 focus:ring-0 sm:h-6 sm:w-6"
           />
           <label
             className={`${
@@ -102,18 +102,18 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
           </label>
         </div>
 
-        <div className="flex gap-2 flex-shrink-0">
+        <div className="flex flex-shrink-0 gap-2">
           <button
             type="button"
             onClick={() => editTodo(todo.todoId, todo.text)}
-            className="py-1 px-3 sm:px-6 rounded-md bg-green-500 text-xs sm:text-base"
+            className="rounded-md bg-green-500 px-3 py-1 text-xs sm:px-6 sm:text-base"
           >
             Edit
           </button>
           <button
             type="button"
             onClick={() => deleteTodo(todo.todoId)}
-            className="py-1 px-3 sm:px-6 rounded-md bg-red-500 text-xs sm:text-base"
+            className="rounded-md bg-red-500 px-3 py-1 text-xs sm:px-6 sm:text-base"
           >
             Delete
           </button>

@@ -52,14 +52,14 @@ export default function EditTodo({ editView, setEditView }: EditTodoProps) {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-opacity-30 backdrop-blur-sm z-50"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-30 backdrop-blur-sm"
       onClick={handleClickOutside}
     >
-      <div className="bg-[#2D70FD] w-96 h-60 gap-6 border-2 border-black rounded-xl flex flex-col text-white px-4 py-2 shadow-lg">
-        <h3 className="text-xl font-bold pt-3 mt-3 pl-3">Edit Todo</h3>
+      <div className="flex h-60 w-96 flex-col gap-6 rounded-xl border-2 border-black bg-[#2D70FD] px-4 py-2 text-white shadow-lg">
+        <h3 className="mt-3 pl-3 pt-3 text-xl font-bold">Edit Todo</h3>
         <div className="flex flex-col gap-3">
           <input
-            className="p-3 text-black rounded-lg"
+            className="rounded-lg p-3 text-black"
             type="text"
             name="edittodo"
             id="edittodo"
@@ -71,7 +71,7 @@ export default function EditTodo({ editView, setEditView }: EditTodoProps) {
           />
           <button
             type="button"
-            className="bg-black text-white py-3 rounded-lg"
+            className="rounded-lg bg-black py-3 text-white"
             onClick={editTodoValue}
           >
             Save

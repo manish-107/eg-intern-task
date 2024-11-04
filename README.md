@@ -1,29 +1,27 @@
-Required Skill Sets for the Role:
+# To-Do List Application
 
-HTML
-CSS
-Tailwind CSS
-React
-Next.js
+A simple and elegant To-Do List application built with modern web technologies. This app allows users to manage their tasks efficiently, featuring a clean design inspired by a provided Figma UI.
 
-Task: To-Do List App
+## Tech Stack
 
-Your task is to build a simple to-do list application using the above-mentioned technologies. The app should allow users to:
+- **Next.js**: A React framework for building server-side rendered and static web applications.
+- **React**: A JavaScript library for building user interfaces.
+- **Tailwind CSS**: A utility-first CSS framework for styling the application.
+- **Context API**: For state management, providing a way to share values across components without prop drilling.
 
-Add a new task (ensure tasks cannot be empty)
-Mark tasks as completed
-Clear all tasks
+## Features
 
-Please refer to the simple Figma link below to view the UI design and aim for perfect styling:
-To-Do List App UI
+### Core Features
+- **Add New Task**: Users can enter a task in the input field and add it to the list by clicking the "Add" button. Tasks cannot be empty.
+- **Mark Task as Complete**: Each task has a checkbox that users can click to mark it as completed, visually differentiating completed tasks (e.g., checkmark and strikethrough styling).
+- **Clear All Tasks**: A "Clear All" button allows users to delete all tasks in the list at once.
+- **Task Counter**: Displays the total number of tasks currently in the list, helping users keep track of their tasks.
 
-Additional Notes:
+### Other Features
+- **Sort Options**:
+  - Sort by Not Completed: Displays only the tasks that are yet to be completed.
+  - Sort by Completed: Displays only the tasks that are marked as completed.
+  - Sort by Recent To-Do: Sorts tasks based on their recency, showing newly added tasks at the top.
+- **Edit Task**: Each task has an "Edit" button that allows users to modify the task description.
+- **Delete Task**: Each task has a "Delete" button to remove it from the list.
 
-Bonus Points: Consider adding features such as task sorting, deleting, editing, or using local storage to persist tasks. And anything that you think will spice up the existing UX while getting creative.
-Design Fidelity: Ensure that the final design aligns closely with the provided Figma file. (If adding additional features it’s ok if the design is modified a bit)
-Coding Standards: Write clean, maintainable code with descriptive variable names and comments where necessary.
-
-Submission Instructions:
-
-Demo: Upload your completed project to a free hosting platform, such as Vercel, Netlify or any other free hosting provider, and provide the link.
-GitHub Repository: Share the GitHub repository link containing the code for your project.
