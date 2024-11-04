@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function GHeader() {
   return (
-    <header className="p-3 sm:p-5 bg-black h-28 sm:h-32 border-b-2 border-[#ffffff39]">
+    <header className="p-3 sm:p-5 bg-black  h-32 sm:h-32 border-b-2 border-[#ffffff39]">
       <div className="bg-[#0d3e20] p-3 sm:p-5 max-w-xl sm:max-w-4xl flex flex-col sm:flex-row justify-between items-center mx-auto rounded-xl border-2 border-[#1fb256]">
         <h3 className="text-lg sm:text-xl font-semibold text-center sm:text-left">
           📑 Features of To-Do List
