@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { DisplayTodos } from "./DisplayTodos";
-import { ReloadContext } from "../context/ContextState"; 
+import { ReloadContext } from "../context/ContextState";
 
 interface TodoData {
   todoId: number;
@@ -10,8 +10,12 @@ interface TodoData {
   completed: boolean;
 }
 
+// Main component for filtering and displaying todo items
 export const FilterData = () => {
+  // State to track selected sorting option
   const [selectedSort, setSelectedSort] = useState<string>("");
+
+  // State to hold list of todo items
   const [todoData, setTodoData] = useState<TodoData[]>([]);
 
   // Use the context to get reloadState and setReloadState
@@ -23,7 +27,8 @@ export const FilterData = () => {
   }
 
   const { reloadState, setReloadState } = context;
-  
+
+  // useEffect hook to load todo items from local storage when reloadState changes
   useEffect(() => {
     const storedData = localStorage.getItem("Todo");
     if (storedData) {
@@ -33,11 +38,13 @@ export const FilterData = () => {
     }
   }, [reloadState]);
 
+  // Handle sort option change and trigger reload state change to refresh data
   const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSort(event.target.value);
     setReloadState((prev) => prev + 1);
   };
 
+  // Function to sort todo items based on selected sort option
   const sortedTodos = () => {
     switch (selectedSort) {
       case "NotCompleted":

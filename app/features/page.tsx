@@ -1,7 +1,8 @@
-import GFooter from "../components/guide/GFooter";
-import GHeader from "../components/guide/GHeader";
+import GFooter from "../components/features/GFooter";
+import GHeader from "../components/features/GHeader";
 
-export default function Guide() {
+//Features pages to display features of todo list
+export default function Features() {
   return (
     <div className="flex min-h-screen flex-col bg-[#1a171d] text-[#e5d4ff]">
       <GHeader />
