@@ -41,8 +41,8 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
 
   const { reloadState, setReloadState } = Rcontext;
   const { setShowToastMessage } = Tcontext;
-  
-  // Mark perticular todo as completed 
+
+  // Mark perticular todo as completed
   const markAsCompleted = (todoId: number, completed: boolean) => {
     const updatedTodos = todoData.map((item) =>
       item.todoId === todoId ? { ...item, completed } : item
@@ -51,7 +51,7 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
     setTodoData(updatedTodos);
     setReloadState((prev) => prev + 1);
   };
-  
+
   //
   const editTodo = (todoId: number, todoText: string) => {
     setEditView({
@@ -60,14 +60,12 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
       showEditText: true,
     });
   };
-  
+
   //Set todos whenever reloadstate changes
   useEffect(() => {
     const savedTodos = localStorage.getItem("Todo");
     if (savedTodos) setTodoData(JSON.parse(savedTodos));
   }, [reloadState]);
-
- 
 
   //Delete todo by id
   const deleteTodo = (todoId: number) => {
@@ -102,7 +100,7 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
               todo.completed
                 ? "line-through text-[#8F98A8]"
                 : "text-gray-800 hover:text-[#2D70FD]"
-            } text-sm sm:text-base break-words`}
+            } text-base sm:text-base break-words`}
             style={{ maxWidth: "60%", whiteSpace: "normal" }}
           >
             {todo.text}
@@ -113,14 +111,14 @@ export const DisplayTodos = ({ todo }: DisplayTodosProps) => {
           <button
             type="button"
             onClick={() => editTodo(todo.todoId, todo.text)}
-            className="rounded-md bg-green-500 px-3 py-1 text-xs sm:px-6 sm:text-base"
+            className="rounded-md bg-green-500 px-4 py-2 text-xs sm:px-6 sm:text-base"
           >
             Edit
           </button>
           <button
             type="button"
             onClick={() => deleteTodo(todo.todoId)}
-            className="rounded-md bg-red-500 px-3 py-1 text-xs sm:px-6 sm:text-base"
+            className="rounded-md bg-red-500 px-4 py-2 text-xs sm:px-6 sm:text-base"
           >
             Delete
           </button>
